@@ -7,9 +7,8 @@
         <title>Template do site</title>
     </head>
     <body>
-        <p>Topo do site</p>
-        
-        <div class="container-fluid">
+        <div class="environment"></div>        
+        <div class="container">
             <?php
                 $this->loadViewInTemplate($viewName, $viewData);
             ?>
