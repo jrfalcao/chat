@@ -8,7 +8,7 @@ class homeController extends controller {
         
     public function index(){
         $dados = array();
-        $_SESSION['area'] == NULL;
+        
         $this->loadTemplate("home", $dados);
     }
 }

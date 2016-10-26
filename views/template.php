@@ -3,6 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <script src="assets/js/jquery-3.1.1.min.js" type="text/javascript"></script>
+        <script src="assets/js/script.js" type="text/javascript"></script>
         <link href="assets/css/template.css" rel="stylesheet" type="text/css"/>
         <link href="assets/css/style.css" rel="stylesheet" type="text/css"/>
         <link href="assets/css/bootstrap-3.3.7-dist/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css"/>
@@ -24,6 +25,4 @@
             ?>
         </div>
     </body>
-    <br><br>
-    <footer>Rodapé do site!!! <?= date('Y'); ?></footer>
 </html>
