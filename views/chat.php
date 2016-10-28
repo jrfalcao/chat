@@ -11,6 +11,6 @@
 </div>
 
 <div class="inputarea">
-    <input type="text" class="msg" >
+    <input type="text" class="msg" onkeyup="keyUpChat(this, event)">
 </div>
 
