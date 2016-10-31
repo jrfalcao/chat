@@ -35,7 +35,7 @@ function loadClass($directory, $class) {
             endif;
         endforeach;
     } catch (ErrorException $e) {
-        $e->getMessage("Não foi possível incluir $classlass.php");
+        $e->getMessage("Não foi possível incluir $class.php");
         die;
     }
 }

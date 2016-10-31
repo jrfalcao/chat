@@ -8,11 +8,7 @@
     </thead>
     
     <tbody id="areachamados">
-        <tr>
-            <td>000000</td>
-            <td>Fulano de tal</td>
-            <td>Em andamento</td>
-        </tr>
+       
     </tbody>
     
 </table>
