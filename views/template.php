@@ -19,7 +19,7 @@
                 echo '#080808';
             }
         ?>"></div>        
-        <div class="container-fluid corpo-chat">
+        <div class="container-fluid">
             <?php
                 $this->loadViewInTemplate($viewName, $viewData);
             ?>

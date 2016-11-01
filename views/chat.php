@@ -9,3 +9,5 @@
     <input type="text" class="msg" onkeyup="keyUpChat(this, event)">
 </div>
 
+<script> updateChat(); </script>
+

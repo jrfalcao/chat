@@ -14,6 +14,8 @@ class ajaxController extends controller{
         $dados = array();
         $chamados = new chamados();
         $dados['chamados'] = $chamados->getChamados();
+        
+        echo json_encode($dados);
     }
     
     public function sendmessage() {
@@ -27,5 +29,18 @@ class ajaxController extends controller{
             $m = new mensagens();
             $m->sendMessage($idchamado,$origem,$msg);
         }
+    }
+    public function getmassage() {
+        $dados = array();
+        $m = new mensagens();
+        $c = new chamados();
+        
+        $idchamado = $_SESSION['chatwindow'];
+        $area = $_SESSION['area'];
+        $lastMsg = $c->getLastMsg($idchamado,$area);
+        
+        $dados['mensagens'] = $m->getMessage($idchamado, $lastMsg);
+        
+        echo json_encode($dados);
     }
 }

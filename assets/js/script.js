@@ -45,17 +45,38 @@ function keyUpChat(obj, event) {
         var msg = obj.value;
         var nome = $('.inputarea').attr('data-nome');
         var dt = new Date();
-        var hr = dt.getHours()+":"+dt.getMinutes();
-        
+        var hr = dt.getHours() + ":" + dt.getMinutes();
+
         $.post(
-            '/chat/ajax/sendmessage',
-            { msg : msg },
-            function (data) {
-                $('.chatarea').append('<div class=\'msgitem\'>'+hr+' <strong>'+nome+' </strong> - <em>'+msg+'</em>    </div>');
-            }
+                '/chat/ajax/sendmessage',
+                {msg: msg},
+                function (data) {
+                    $('.chatarea').append('<div class=\'msgitem\'>' + hr + ' <strong>' + nome + ' </strong> - <em>' + msg + '</em>    </div>');
+                }
         );
         obj.value = '';
     }
 }
-
+function updateChat() {
+    $.ajax({
+        url: '/chat/ajax/getmassage',
+        dataType: 'json',
+        success: function (json) {
+            for (var i in json.mensagens) {
+                var hr = json.mensagens[i].data_enviado;
+                if (json.mensagens[i].origem == 0) {
+                    var nome = 'suporte'
+                } else {
+                    nome = $('.inputarea').attr('data-nome');
+                }
+                var msg = json.mensagens[i].mensagem;
+                $('.chatarea').append('<div class=\'msgitem\'>' + hr + ' <strong>' + nome + ' </strong> - <em>' + msg + '</em>    </div>');
+            }
+            setTimeout(updateChat(), 2000);
+        },
+        error: function () {
+            setTimeout(updateChat(), 2000);
+        }
+    });
+}
 
