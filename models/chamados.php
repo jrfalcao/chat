@@ -71,7 +71,7 @@ class chamados extends model {
     public function updateLastMsg($id,$area) {
         
         if (!empty($id) && !empty($area)) {
-            $sql = "UPDATE chamados SET data_last_" . $area . " = ".date('Y-m-d H:i:s')." WHERE id = '$id'";
+            $sql = "UPDATE chamados SET data_last_" . $area . " = NOW() WHERE id = '$id'";
             $sql = $this->db->query($sql);
         }
     }

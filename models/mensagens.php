@@ -6,6 +6,10 @@
  */
 class mensagens extends model{
     
+    public function __construct() {
+        parent::__construct();
+    }
+    
     public function sendMessage($idchamado,$origem,$msg) {
         
         $sql = "INSERT INTO `chat`.`mensagens` (`id_chamados`, `mensagem`, `origem`, `data_enviado`) VALUES (?,?,?,?)";
@@ -15,7 +19,7 @@ class mensagens extends model{
     public function getMessage($idchamado, $lastMsg) {
         $array = array();
         
-        $sql = "SELECT * FROM mensagens WHERE id_chamados='$idchamado' AND data_enviado > .'$lastMsg'";
+        $sql = "SELECT * FROM mensagens WHERE id_chamados='$idchamado' AND data_enviado > '$lastMsg'";
         $sql = $this->db->query($sql);
         
         if($sql->rowCount() > 0){

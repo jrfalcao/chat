@@ -48,34 +48,32 @@ function keyUpChat(obj, event) {
         var hr = dt.getHours() + ":" + dt.getMinutes();
 
         $.post(
-                '/chat/ajax/sendmessage',
-                {msg: msg},
-                function (data) {
-                    $('.chatarea').append('<div class=\'msgitem\'>' + hr + ' <strong>' + nome + ' </strong> - <em>' + msg + '</em>    </div>');
-                }
+            '/chat/ajax/sendmessage',
+            {msg: msg},
+            function (data) {
+                $('.chatarea').append('<div class=\'msgitem\'>' + hr + ' <strong>' + nome + ' </strong> - <em>' + msg + '</em>    </div>');
+            }
         );
-        obj.value = '';
+        obj.value = '';  
     }
 }
 function updateChat() {
     $.ajax({
-        url: '/chat/ajax/getmassage',
+        url: '/chat/ajax/getmessage',
         dataType: 'json',
         success: function (json) {
-            for (var i in json.mensagens) {
-                var hr = json.mensagens[i].data_enviado;
-                if (json.mensagens[i].origem == 0) {
-                    var nome = 'suporte'
-                } else {
-                    nome = $('.inputarea').attr('data-nome');
+            if(json.mensagens.length > 0){
+                for (var i in json.mensagens) {
+                    var hr = json.mensagens[i].data_enviado;
+                    var nome = (json.mensagens[i].origem == 0) ? 'suporte' : $('.inputarea').attr('data-nome');
+                    var msg = json.mensagens[i].mensagem;
+                    $('.chatarea').append('<div class=\'msgitem\'>' + hr + ' <strong>' + nome + ' </strong> - <em>' + msg + '</em>    </div>');
                 }
-                var msg = json.mensagens[i].mensagem;
-                $('.chatarea').append('<div class=\'msgitem\'>' + hr + ' <strong>' + nome + ' </strong> - <em>' + msg + '</em>    </div>');
             }
-            setTimeout(updateChat(), 2000);
+            setTimeout(updateChat, 2000);
         },
         error: function () {
-            setTimeout(updateChat(), 2000);
+            setTimeout(updateChat, 2000);
         }
     });
 }
