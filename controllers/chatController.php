@@ -14,6 +14,8 @@ class chatController extends controller {
         if (isset($_GET['id']) && !empty($_GET['id'])) {
             $id = filter_input(INPUT_GET, 'id');
             $c->atualizaStatus($id, 1);
+            
+            $_SESSION['chatwindow'] = $id;
         }
         elseif(isset($_POST['nome']) && !empty($_POST['nome'])){
             $nome = filter_input(INPUT_POST, 'nome');
@@ -27,14 +29,9 @@ class chatController extends controller {
             exit();
         }
 
-        if (isset($_SESSION['area']) && $_SESSION['area'] == 'suporte') {
-            $dados['nome'] = 'Suporte';
-        } 
-        elseif (isset($_SESSION['area']) && $_SESSION['area'] == 'cliente') {
-           $idchamado = $_SESSION['chatwindow'];
-           $chamado = $c->getChamado($idchamado);
-           $dados['nome'] = $chamado['nome'];            
-        }
+        $idchamado = $_SESSION['chatwindow'];
+        $chamado = $c->getChamado($idchamado);
+        $dados['nome'] = $chamado['nome'];
 
         $this->loadTemplate("chat", $dados);
     }

@@ -24,6 +24,10 @@ class mensagens extends model{
         
         if($sql->rowCount() > 0){
             $array = $sql->fetchAll();
+            
+            foreach ($array as $key => $value) {
+                $array[$key]['data_enviado'] = date('H:i', strtotime($value['data_enviado']));
+            }
         }
         $area = $_SESSION['area'];
         $c = new chamados();

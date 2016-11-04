@@ -43,16 +43,10 @@ function resetChamados() {
 function keyUpChat(obj, event) {
     if (event.keyCode == 13) {
         var msg = obj.value;
-        var nome = $('.inputarea').attr('data-nome');
-        var dt = new Date();
-        var hr = dt.getHours() + ":" + dt.getMinutes();
 
         $.post(
             '/chat/ajax/sendmessage',
-            {msg: msg},
-            function (data) {
-                $('.chatarea').append('<div class=\'msgitem\'>' + hr + ' <strong>' + nome + ' </strong> - <em>' + msg + '</em>    </div>');
-            }
+            {msg: msg}
         );
         obj.value = '';  
     }
@@ -69,6 +63,7 @@ function updateChat() {
                     var msg = json.mensagens[i].mensagem;
                     $('.chatarea').append('<div class=\'msgitem\'>' + hr + ' <strong>' + nome + ' </strong> - <em>' + msg + '</em>    </div>');
                 }
+                $('.chatarea').scrollTop($('.chatarea')[0].scrollHeight);
             }
             setTimeout(updateChat, 2000);
         },
